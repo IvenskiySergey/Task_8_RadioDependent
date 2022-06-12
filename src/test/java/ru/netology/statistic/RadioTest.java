@@ -8,63 +8,84 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadioTest {
 
+    Radio radio = new Radio();
+
     @ParameterizedTest
     @CsvFileSource(resources = {"/setTestData.csw"})
     public void setTest(int newCurrentStation, int expected) {
-        Radio radio = new Radio();
-
         radio.setCurrentStation(newCurrentStation);
-        int actual = radio.getCurrentStation();
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, radio.getCurrentStation());
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = {"/nextStationTestData.csw"})
     public void nextStationTest(int newCurrentStation, int expected) {
-        Radio radio = new Radio();
-
         radio.setCurrentStation(newCurrentStation);
         radio.nextStation();
-        int actual = radio.getCurrentStation();
 
-        assertEquals(expected, actual);
+        assertEquals(expected, radio.getCurrentStation());
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = {"/prevStationTestData.csw"})
     public void prevStationTest(int newCurrentStation, int expected) {
-        Radio radio = new Radio();
-
         radio.setCurrentStation(newCurrentStation);
         radio.prevStation();
-        int actual = radio.getCurrentStation();
 
-        assertEquals(expected, actual);
+        assertEquals(expected, radio.getCurrentStation());
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = {"/upVolumeTestData.csw"})
     public void upStation(int newVolume, int expected) {
-        Radio radio = new Radio();
-
         radio.setVolume(newVolume);
         radio.upVolume();
-        int actual = radio.getVolume();
 
-        assertEquals(expected, actual);
+        assertEquals(expected, radio.getVolume());
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = {"/downVolumeTestData.csw"})
     public void downStation(int newVolume, int expected) {
-        Radio radio = new Radio();
-
         radio.setVolume(newVolume);
         radio.downVolume();
-        int actual = radio.getVolume();
 
-        assertEquals(expected, actual);
+        assertEquals(expected, radio.getVolume());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = {"/setNStationTestData.csw"})
+    public void setNStation(int numberStation, int newCurrentStation, int expected1, int expected2, int expected3) {
+        Radio radio1 = new Radio(numberStation);
+        radio1.setCurrentStation(newCurrentStation);
+
+        Assertions.assertEquals(expected1, radio1.getMinStation());
+        Assertions.assertEquals(expected2, radio1.getMaxStation());
+        Assertions.assertEquals(expected3, radio1.getCurrentStation());
+    }
+    @ParameterizedTest
+    @CsvFileSource(resources = {"/nextNStationTestData.csw"})
+    public void nextNStation(int numberStation, int newCurrentStation, int expected1, int expected2, int expected3) {
+        Radio radio1 = new Radio(numberStation);
+        radio1.setCurrentStation(newCurrentStation);
+        radio1.nextStation();
+
+        Assertions.assertEquals(expected1, radio1.getMinStation());
+        Assertions.assertEquals(expected2, radio1.getMaxStation());
+        Assertions.assertEquals(expected3, radio1.getCurrentStation());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = {"/prevNStationTestData.csw"})
+    public void prevNStation(int numberStation, int newCurrentStation, int expected1, int expected2, int expected3) {
+        Radio radio1 = new Radio(numberStation);
+        radio1.setCurrentStation(newCurrentStation);
+        radio1.prevStation();
+
+        Assertions.assertEquals(expected1, radio1.getMinStation());
+        Assertions.assertEquals(expected2, radio1.getMaxStation());
+        Assertions.assertEquals(expected3, radio1.getCurrentStation());
     }
 
 }
