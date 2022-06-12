@@ -64,6 +64,7 @@ public class RadioTest {
         Assertions.assertEquals(expected2, radio1.getMaxStation());
         Assertions.assertEquals(expected3, radio1.getCurrentStation());
     }
+
     @ParameterizedTest
     @CsvFileSource(resources = {"/nextNStationTestData.csw"})
     public void nextNStation(int numberStation, int newCurrentStation, int expected1, int expected2, int expected3) {
